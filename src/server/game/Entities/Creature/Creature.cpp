@@ -1153,7 +1153,7 @@ void Creature::SelectLevel()
     CreatureBaseStats const* stats = sObjectMgr->GetCreatureBaseStats(level, cInfo->unit_class);
 
     // health
-    float healthmod = _GetHealthMod(rank);
+    float healthmod = _GetHealthModAdjusted(rank, this);
 
     uint32 basehp = stats->GenerateHealth(cInfo);
     uint32 health = uint32(basehp * healthmod);
@@ -1195,22 +1195,93 @@ void Creature::SelectLevel()
     SetModifierValue(UNIT_MOD_ATTACK_POWER_RANGED, BASE_VALUE, stats->RangedAttackPower);
 }
 
-float Creature::_GetHealthMod(int32 Rank)
+float Creature::_GetHealthModAdjusted(int32 Rank, Creature const* creature)
 {
+  // HP rate multipliers adjusted for a 5-man party
+  //                    N      E/RE   R      WB
+  float DEF_WORLD[] = { 3.00f, 2.00f, 3.00f, 1.00f};
+  float DEF_5MAN[]  = { 1.00f, 1.00f, 1.00f, 1.00f};
+  float DEF_10MAN[] = { 0.75f, 0.47f, 0.75f, 1.00f};
+  float DEF_20MAN[] = { 0.25f, 0.25f, 0.25f, 1.00f};
+  float DEF_25MAN[] = { 0.20f, 0.20f, 0.20f, 1.00f};
+  float DEF_40MAN[] = { 0.11f, 0.11f, 0.11f, 1.00f};
+
+  std::map <uint32, float*> rates;
+  // Kalimdor Dungeons
+  rates[389]   = DEF_5MAN; // RFC
+  rates[48]    = DEF_5MAN; // BFD
+  rates[429]   = DEF_5MAN; // DM
+  rates[349]   = DEF_5MAN; // Mara
+  rates[47]    = DEF_5MAN; // RFK
+  rates[129]   = DEF_5MAN; // RFD
+  rates[43]    = DEF_5MAN; // WC
+  rates[209]   = DEF_5MAN; // ZF
+
+  // Eastern Kingdoms Dungeons
+  rates[230]   = DEF_5MAN; // BRD
+  rates[229]   = DEF_5MAN; // BRS
+  rates[90]    = DEF_5MAN; // Gnome
+  rates[36]    = DEF_5MAN; // DM
+  rates[189]   = DEF_5MAN; // SM
+  rates[289]   = DEF_5MAN; // Sholo
+  rates[33]    = DEF_5MAN; // SFK
+  rates[329]   = DEF_5MAN; // Strat
+  rates[109]   = DEF_5MAN; // ST
+  rates[70]    = DEF_5MAN; // Ulda
+
+  // Classic Raids
+  rates[509] = DEF_20MAN; // AQ20
+  rates[531] = DEF_40MAN; // AQ40
+  rates[469] = DEF_40MAN; // BWL
+  rates[409] = DEF_40MAN; // MC
+  rates[309] = DEF_20MAN; // ZG
+
+  // TBC Instances
+  rates[560] = DEF_5MAN; // COT:HFH
+  rates[269] = DEF_5MAN; // COT:BM
+  rates[595] = DEF_5MAN; // COT:STRAT
+  rates[585] = DEF_5MAN; // MGT
+
+  // TBC Raids
+  rates[534] = DEF_25MAN; // COT:HS
+  rates[532] = DEF_10MAN; // Kara
+  rates[568] = DEF_10MAN; // ZA
+  rates[580] = DEF_25MAN; // SWP
+
+  uint32 mapId = creature->GetMap()->GetId();
+
+  //TC_LOG_INFO("test", "Map id: " + std::to_string(mapId));
+  //TC_LOG_INFO("test", "Map name: %s", creature->GetMap()->GetMapName());
+
+  if(rates.find(mapId) == rates.end())
+  {
+    return _GetHealthMod(Rank, DEF_WORLD);
+  }
+
+  return _GetHealthMod(Rank, rates[mapId]);
+}
+
+float Creature::_GetHealthMod(int32 Rank, float rates[])
+{
+    float normal = rates[0];
+    float elite = rates[1];
+    float rare = rates[2];
+    float worldBoss = rates[3];
+
     switch (Rank)                                           // define rates for each elite rank
     {
         case CREATURE_ELITE_NORMAL:
-            return sWorld->getRate(RATE_CREATURE_NORMAL_HP);
+            return sWorld->getRate(RATE_CREATURE_NORMAL_HP) * normal;
         case CREATURE_ELITE_ELITE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_HP);
+            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_HP) * elite;
         case CREATURE_ELITE_RAREELITE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_RAREELITE_HP);
+            return sWorld->getRate(RATE_CREATURE_ELITE_RAREELITE_HP) * elite;
         case CREATURE_ELITE_WORLDBOSS:
-            return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_HP);
+            return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_HP) * worldBoss;
         case CREATURE_ELITE_RARE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_RARE_HP);
+            return sWorld->getRate(RATE_CREATURE_ELITE_RARE_HP) * rare;
         default:
-            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_HP);
+            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_HP) * elite;
     }
 }
 
@@ -1370,7 +1441,7 @@ bool Creature::LoadCreatureFromDB(ObjectGuid::LowType spawnId, Map* map, bool ad
         curhealth = data->curhealth;
         if (curhealth)
         {
-            curhealth = uint32(curhealth*_GetHealthMod(GetCreatureTemplate()->rank));
+	  curhealth = uint32(curhealth*_GetHealthModAdjusted(GetCreatureTemplate()->rank, this));
             if (curhealth < 1)
                 curhealth = 1;
         }

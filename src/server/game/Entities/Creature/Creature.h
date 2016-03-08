@@ -689,7 +689,8 @@ class Creature : public Unit, public GridObject<Creature>, public MapObject
         // vendor items
         VendorItemCounts m_vendorItemCounts;
 
-        static float _GetHealthMod(int32 Rank);
+        static float _GetHealthMod(int32 Rank, float rates[]);
+        static float _GetHealthModAdjusted(int32 Rank, Creature const* creature);
 
         ObjectGuid m_lootRecipient;
         uint32 m_lootRecipientGroup;
