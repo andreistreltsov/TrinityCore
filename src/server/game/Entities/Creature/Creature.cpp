@@ -1291,6 +1291,40 @@ void Creature::LowerPlayerDamageReq(uint32 unDamage)
         m_PlayerDamageReq > unDamage ? m_PlayerDamageReq -= unDamage : m_PlayerDamageReq = 0;
 }
 
+float Creature::_GetDamageModAdjusted(int32 Rank, Creature const* creature)
+{
+  // Damage multipliers adjusted for a 5-man party
+  //                       N      E/RE   R      WB
+  float DEF_WORLD[]    = { 2.00f, 1.50f, 2.00f, 1.00f};
+  float DEF_DUNGEON[]  = { 1.00f, 1.00f, 1.00f, 1.00f};
+
+  float* rates  = DEF_WORLD;
+  if (creature->GetMap()->IsDungeon())
+  {
+    rates = DEF_DUNGEON;
+  }
+  float normal = rates[0];
+  float elite = rates[1];
+  float rare = rates[2];
+  float worldBoss = rates[3];
+  
+  switch (Rank)                                           // define rates for each elite rank
+    {
+        case CREATURE_ELITE_NORMAL:
+	  return normal;
+        case CREATURE_ELITE_ELITE:
+	  return elite;
+        case CREATURE_ELITE_RAREELITE:
+	  return elite;
+        case CREATURE_ELITE_WORLDBOSS:
+	  return worldBoss;
+        case CREATURE_ELITE_RARE:
+	  return rare;
+        default:
+	  return elite;
+    }
+}
+
 float Creature::_GetDamageMod(int32 Rank)
 {
     switch (Rank)                                           // define rates for each elite rank
