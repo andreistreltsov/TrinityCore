@@ -1346,20 +1346,36 @@ float Creature::_GetDamageMod(int32 Rank)
 
 float Creature::GetSpellDamageMod(int32 Rank) const
 {
+    // Damage multipliers adjusted for a 5-man party
+    //                       N      E/RE   R      WB
+    float DEF_WORLD[]    = { 2.00f, 1.50f, 2.00f, 1.00f};
+    float DEF_DUNGEON[]  = { 1.00f, 1.00f, 1.00f, 1.00f};
+
+    float* rates  = DEF_WORLD;
+    if (this->GetMap()->IsDungeon())
+    {
+      rates = DEF_DUNGEON;
+    }
+
+    float normal = rates[0];
+    float elite = rates[1];
+    float rare = rates[2];
+    float worldBoss = rates[3];
+
     switch (Rank)                                           // define rates for each elite rank
     {
         case CREATURE_ELITE_NORMAL:
-            return sWorld->getRate(RATE_CREATURE_NORMAL_SPELLDAMAGE);
+	    return sWorld->getRate(RATE_CREATURE_NORMAL_SPELLDAMAGE) * normal;
         case CREATURE_ELITE_ELITE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE);
+	    return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE) * elite;
         case CREATURE_ELITE_RAREELITE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_RAREELITE_SPELLDAMAGE);
+	    return sWorld->getRate(RATE_CREATURE_ELITE_RAREELITE_SPELLDAMAGE) * elite;
         case CREATURE_ELITE_WORLDBOSS:
-            return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE);
+	    return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE) * worldBoss;
         case CREATURE_ELITE_RARE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_RARE_SPELLDAMAGE);
+	    return sWorld->getRate(RATE_CREATURE_ELITE_RARE_SPELLDAMAGE) * rare;
         default:
-            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE);
+	    return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE) * elite;
     }
 }
 
