@@ -1004,7 +1004,7 @@ void ObjectMgr::CheckCreatureTemplate(CreatureTemplate const* cInfo)
         const_cast<CreatureTemplate*>(cInfo)->flags_extra &= CREATURE_FLAG_EXTRA_DB_ALLOWED;
     }
 
-    const_cast<CreatureTemplate*>(cInfo)->ModDamage *= Creature::_GetDamageMod(cInfo->rank);
+    const_cast<CreatureTemplate*>(cInfo)->ModDamage; //*= Creature::_GetDamageMod(cInfo->rank);
 }
 
 void ObjectMgr::LoadCreatureAddons()
