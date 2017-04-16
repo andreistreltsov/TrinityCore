@@ -509,7 +509,7 @@ void World::LoadConfigSettings(bool reload)
     rate_values[RATE_CREATURE_ELITE_RAREELITE_SPELLDAMAGE_5MANOLD] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.SpellDamage.5ManOld", 1.0f);
     rate_values[RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE_5MANOLD] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.SpellDamage.5ManOld", 1.0f);
     rate_values[RATE_CREATURE_ELITE_RARE_SPELLDAMAGE_5MANOLD]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.SpellDamage.5ManOld", 1.0f);
-    rate_values[RATE_XP_KILL_5MANOLD]     = sConfigMgr->GetFloatDefault("Rate.XP.Kill.5ManOld.5ManOld", 1.0f);
+    rate_values[RATE_XP_KILL_5MANOLD]     = sConfigMgr->GetFloatDefault("Rate.XP.Kill.5ManOld", 1.0f);
 
     // Group2
     rate_values[RATE_CREATURE_NORMAL_DAMAGE_2]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.Damage.2", 1.0f);
@@ -527,7 +527,7 @@ void World::LoadConfigSettings(bool reload)
     rate_values[RATE_CREATURE_ELITE_RAREELITE_SPELLDAMAGE_2] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.SpellDamage.2", 1.0f);
     rate_values[RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE_2] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.SpellDamage.2", 1.0f);
     rate_values[RATE_CREATURE_ELITE_RARE_SPELLDAMAGE_2]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.SpellDamage.2", 1.0f);
-    rate_values[RATE_XP_KILL_2]     = sConfigMgr->GetFloatDefault("Rate.XP.Kill.5ManOld.2", 1.0f);
+    rate_values[RATE_XP_KILL_2]     = sConfigMgr->GetFloatDefault("Rate.XP.Kill.2", 1.0f);
 
     // Group3
     rate_values[RATE_CREATURE_NORMAL_DAMAGE_3]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.Damage.3", 1.0f);

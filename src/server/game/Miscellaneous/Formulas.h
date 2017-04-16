@@ -163,14 +163,6 @@ namespace Trinity
             Creature* creature = u->ToCreature();
             uint32 gain = 0;
 
-            // XP adjustment
-            float xpAdjust = 1.0f;
-            uint32 mapId = creature->GetMap()->GetId();
-            if(_instances5Man.find(mapId) != _instances5Man.end()){
-                xpAdjust = sWorld->getRate(RATE_XP_KILL_5MANOLD);
-            }
-
-
             if (!creature || (!creature->IsTotem() && !creature->IsPet() && !creature->IsCritter() &&
                 !(creature->GetCreatureTemplate()->flags_extra & CREATURE_FLAG_EXTRA_NO_XP_AT_KILL)))
             {
@@ -192,7 +184,7 @@ namespace Trinity
                     xpMod *= creature->GetCreatureTemplate()->ModExperience;
                 }
 
-                xpMod *= isBattleGround ? sWorld->getRate(RATE_XP_BG_KILL) : sWorld->getRate(RATE_XP_KILL)*xpAdjust;
+                xpMod *= isBattleGround ? sWorld->getRate(RATE_XP_BG_KILL) : sWorld->getRate(RATE_XP_KILL);
                 if (creature && creature->m_PlayerDamageReq) // if players dealt less than 50% of the damage and were credited anyway (due to CREATURE_FLAG_EXTRA_NO_PLAYER_DAMAGE_REQ), scale XP gained appropriately (linear scaling)
                     xpMod *= 1.0f - 2.0f*creature->m_PlayerDamageReq / creature->GetMaxHealth();
 
@@ -200,7 +192,15 @@ namespace Trinity
             }
 
             sScriptMgr->OnGainCalculation(gain, player, u);
-            return gain;
+
+            // XP adjustment
+            float xpAdjust = 1.0f;
+            uint32 mapId = creature->GetMap()->GetId();
+            if(_instances5Man.find(mapId) != _instances5Man.end()){
+                xpAdjust = sWorld->getRate(RATE_XP_KILL_5MANOLD);
+            }
+
+            return gain*xpAdjust;
         }
 
         inline float xp_in_group_rate(uint32 count, bool isRaid)
