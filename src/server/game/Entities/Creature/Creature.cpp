@@ -1345,7 +1345,7 @@ float Creature::_GetHealthMod(int32 Rank, Creature const* creature)
     float worldBoss = 1;
     
 
-    if(_instances5man.find(mapId) != _instances5man.end()){
+    if(_instances5Man.find(mapId) != _instances5Man.end()){
         normal = return sWorld->getRate(RATE_CREATURE_NORMAL_HP_5MANOLD);
         elite = return sWorld->getRate(RATE_CREATURE_ELITE_HP_5MANOLD);
         rare = return sWorld->getRate(RATE_CREATURE_ELITE_RARE_HP_5MANOLD);
