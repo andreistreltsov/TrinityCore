@@ -52,7 +52,7 @@
 
 #include "Packets/QueryPackets.h"
 
-_instances5Man = { 
+std::set <uint32> _instances5Man = { 
       // Kalimdor
       //RFC, BFD, DM, Mara,RFK,RFD,WC, ZF
         389, 48, 429, 349, 47, 129, 43, 209,
@@ -64,22 +64,22 @@ _instances5Man = {
         560,  269,  595,  585, 558, 543, 557, 556, 555, 552, 542, 553, 554, 540, 547, 545, 546
     };
 
-_instances10Man = { 
+std::set <uint32> _instances10Man = { 
        //Kara, ZA
         532, 568
     };
 
-_instances20Man = { 
+std::set <uint32> _instances20Man = { 
        //AQ20,  ZG
         509,    309
     };
 
-_instances25Man = { 
+std::set <uint32> _instances25Man = { 
        //MH, SWP
         534, 580
     };
 
-_instances40Man = { 
+std::set <uint32> _instances40Man = { 
       //AQ40, BWL, MC
         531, 469, 409
     };
@@ -1443,7 +1443,7 @@ float Creature::_GetDamageMod(int32 Rank, Creature const* creature)
 
 float Creature::GetSpellDamageMod(int32 Rank) const
 {
-     uint32 mapId = creature->GetMap()->GetId();
+     uint32 mapId = this->GetMap()->GetId();
 
     float normal = 1;
     float elite = 1;

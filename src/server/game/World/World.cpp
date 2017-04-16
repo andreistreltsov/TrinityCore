@@ -493,7 +493,7 @@ void World::LoadConfigSettings(bool reload)
 
     // CUSTOM RATE CONFIG
 
-    // 5-Man Old Instances (<= 60LVL)
+    // Group1
     rate_values[RATE_CREATURE_NORMAL_DAMAGE_5MANOLD]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.Damage.5ManOld", 1.0f);
     rate_values[RATE_CREATURE_ELITE_ELITE_DAMAGE_5MANOLD]     = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.Elite.Damage.5ManOld", 1.0f);
     rate_values[RATE_CREATURE_ELITE_RAREELITE_DAMAGE_5MANOLD] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.Damage.5ManOld", 1.0f);
@@ -510,6 +510,53 @@ void World::LoadConfigSettings(bool reload)
     rate_values[RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE_5MANOLD] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.SpellDamage.5ManOld", 1.0f);
     rate_values[RATE_CREATURE_ELITE_RARE_SPELLDAMAGE_5MANOLD]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.SpellDamage.5ManOld", 1.0f);
     rate_values[RATE_XP_KILL_5MANOLD]     = sConfigMgr->GetFloatDefault("Rate.XP.Kill.5ManOld.5ManOld", 1.0f);
+
+    // Group2
+    rate_values[RATE_CREATURE_NORMAL_DAMAGE_2]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.Damage.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_ELITE_DAMAGE_2]     = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.Elite.Damage.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RAREELITE_DAMAGE_2] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.Damage.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_WORLDBOSS_DAMAGE_2] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.Damage.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_DAMAGE_2]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.Damage.2", 1.0f);
+    rate_values[RATE_CREATURE_NORMAL_HP_2]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.HP.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_ELITE_HP_2]     = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.Elite.HP.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RAREELITE_HP_2] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.HP.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_WORLDBOSS_HP_2] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.HP.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_HP_2]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.HP.2", 1.0f);
+    rate_values[RATE_CREATURE_NORMAL_SPELLDAMAGE_2]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.SpellDamage.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE_2]     = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.Elite.SpellDamage.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RAREELITE_SPELLDAMAGE_2] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.SpellDamage.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE_2] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.SpellDamage.2", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_SPELLDAMAGE_2]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.SpellDamage.2", 1.0f);
+    rate_values[RATE_XP_KILL_2]     = sConfigMgr->GetFloatDefault("Rate.XP.Kill.5ManOld.2", 1.0f);
+
+    // Group3
+    rate_values[RATE_CREATURE_NORMAL_DAMAGE_3]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.Damage.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_ELITE_DAMAGE_3]     = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.Elite.Damage.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RAREELITE_DAMAGE_3] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.Damage.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_WORLDBOSS_DAMAGE_3] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.Damage.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_DAMAGE_3]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.Damage.3", 1.0f);
+    rate_values[RATE_CREATURE_NORMAL_HP_3]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.HP.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_ELITE_HP_3]     = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.Elite.HP.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RAREELITE_HP_3] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.HP.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_WORLDBOSS_HP_3] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.HP.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_HP_3]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.HP.3", 1.0f);
+    rate_values[RATE_CREATURE_NORMAL_SPELLDAMAGE_3]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.SpellDamage.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE_3]     = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.Elite.SpellDamage.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RAREELITE_SPELLDAMAGE_3] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.SpellDamage.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE_3] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.SpellDamage.3", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_SPELLDAMAGE_3]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.SpellDamage.3", 1.0f);
+    rate_values[RATE_XP_KILL_3]     = sConfigMgr->GetFloatDefault("Rate.XP.Kill.5ManOld.3", 1.0f);
+
+
+
+
+
+
+
+
+
+
+
 
     rate_values[RATE_TALENT] = sConfigMgr->GetFloatDefault("Rate.Talent", 1.0f);
     if (rate_values[RATE_TALENT] < 0.0f)
