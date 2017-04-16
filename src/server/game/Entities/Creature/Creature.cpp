@@ -1351,7 +1351,7 @@ float Creature::_GetHealthMod(int32 Rank, Creature const* creature)
         rare = sWorld->getRate(RATE_CREATURE_ELITE_RARE_HP_5MANOLD);
         worldBoss = sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_HP_5MANOLD);
     }
-
+   
     switch (Rank)     // define rates for each elite rank
     {
         case CREATURE_ELITE_NORMAL:
@@ -1375,41 +1375,71 @@ void Creature::LowerPlayerDamageReq(uint32 unDamage)
         m_PlayerDamageReq > unDamage ? m_PlayerDamageReq -= unDamage : m_PlayerDamageReq = 0;
 }
 
-float Creature::_GetDamageMod(int32 Rank)
+float Creature::_GetDamageMod(int32 Rank, Creature const* creature)
 {
+    uint32 mapId = creature->GetMap()->GetId();
+
+    float normal = 1;
+    float elite = 1;
+    float rare = 1;
+    float worldBoss = 1;
+    
+
+    if(_instances5Man.find(mapId) != _instances5Man.end()){
+        normal = sWorld->getRate(RATE_CREATURE_NORMAL_DAMAGE_5MANOLD);
+        elite = sWorld->getRate(RATE_CREATURE_ELITE_ELITE_DAMAGE_5MANOLD);
+        rare = sWorld->getRate(RATE_CREATURE_ELITE_RARE_DAMAGE_5MANOLD);
+        worldBoss = sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_DAMAGE_5MANOLD);
+    }
+
     switch (Rank)                                           // define rates for each elite rank
     {
         case CREATURE_ELITE_NORMAL:
-            return sWorld->getRate(RATE_CREATURE_NORMAL_DAMAGE);
+            return sWorld->getRate(RATE_CREATURE_NORMAL_DAMAGE)*normal;
         case CREATURE_ELITE_ELITE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_DAMAGE);
+            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_DAMAGE)*elite;
         case CREATURE_ELITE_RAREELITE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_RAREELITE_DAMAGE);
+            return sWorld->getRate(RATE_CREATURE_ELITE_RAREELITE_DAMAGE)*elite;
         case CREATURE_ELITE_WORLDBOSS:
-            return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_DAMAGE);
+            return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_DAMAGE)*worldBoss;
         case CREATURE_ELITE_RARE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_RARE_DAMAGE);
+            return sWorld->getRate(RATE_CREATURE_ELITE_RARE_DAMAGE)*rare;
         default:
-            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_DAMAGE);
+            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_DAMAGE)*elite;
     }
 }
 
 float Creature::GetSpellDamageMod(int32 Rank) const
 {
+     uint32 mapId = creature->GetMap()->GetId();
+
+    float normal = 1;
+    float elite = 1;
+    float rare = 1;
+    float worldBoss = 1;
+    
+
+    if(_instances5Man.find(mapId) != _instances5Man.end()){
+        normal = sWorld->getRate(RATE_CREATURE_NORMAL_SPELLDAMAGE_5MANOLD);
+        elite = sWorld->getRate(RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE_5MANOLD);
+        rare = sWorld->getRate(RATE_CREATURE_ELITE_RARE_SPELLDAMAGE_5MANOLD);
+        worldBoss = sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE_5MANOLD);
+    }
+
     switch (Rank)                                           // define rates for each elite rank
     {
         case CREATURE_ELITE_NORMAL:
-            return sWorld->getRate(RATE_CREATURE_NORMAL_SPELLDAMAGE);
+            return sWorld->getRate(RATE_CREATURE_NORMAL_SPELLDAMAGE)*normal;
         case CREATURE_ELITE_ELITE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE);
+            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE)*elite;
         case CREATURE_ELITE_RAREELITE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_RAREELITE_SPELLDAMAGE);
+            return sWorld->getRate(RATE_CREATURE_ELITE_RAREELITE_SPELLDAMAGE)*elite;
         case CREATURE_ELITE_WORLDBOSS:
-            return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE);
+            return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE)*worldBoss;
         case CREATURE_ELITE_RARE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_RARE_SPELLDAMAGE);
+            return sWorld->getRate(RATE_CREATURE_ELITE_RARE_SPELLDAMAGE)*rare;
         default:
-            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE);
+            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE)*elite;
     }
 }
 
