@@ -828,7 +828,7 @@ class TC_GAME_API ForcedDespawnDelayEvent : public BasicEvent
         Seconds const m_respawnTimer;
 };
 
-std::set <uint32> _instances5ManOld = { 
+std::set <uint32> _instances5Man = { 
       // Kalimdor
       //RFC, BFD, DM, Mara,RFK,RFD,WC, ZF
         389, 48, 429, 349, 47, 129, 43, 209,
