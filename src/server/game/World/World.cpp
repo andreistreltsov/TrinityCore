@@ -304,8 +304,8 @@ bool World::HasRecentlyDisconnected(WorldSession* session)
     }
     return false;
  }
-
-int32 QueuePos(WorldSession* sess)
+ 
+int32 World::GetQueuePos(WorldSession* sess)
 {
     uint32 position = 1;
 
