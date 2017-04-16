@@ -828,35 +828,6 @@ class TC_GAME_API ForcedDespawnDelayEvent : public BasicEvent
         Seconds const m_respawnTimer;
 };
 
-static const std::set <uint32> _instances5Man = { 
-      // Kalimdor
-      //RFC, BFD, DM, Mara,RFK,RFD,WC, ZF
-        389, 48, 429, 349, 47, 129, 43, 209,
-      // EK
-      //BRD, BRS, Gnome,DM,SM, Sch, SFK,Strat,ST, Ulda
-        230, 229, 90, 36, 189, 289, 33, 329, 109, 70,
-      //TBC
-      //HFH, BM,   STRAT, MGT, Auch,HFR, MT,  SH,  SL,  Arc, BF,  Bota,mech,ShH, SP,  SV, UB
-        560,  269,  595,  585, 558, 543, 557, 556, 555, 552, 542, 553, 554, 540, 547, 545, 546
-    };
+extern std::set <uint32> _instances5Man, _instances10Man, _instances20Man, _instances25Man, _instances40Man;
 
- static const std::set <uint32> _instances10Man = { 
-       //Kara, ZA
-        532, 568
-    };
-
-static const std::set <uint32> _instances20Man = { 
-       //AQ20,  ZG
-        509,    309
-    };
-
-static const std::set <uint32> _instances25Man = { 
-       //MH, SWP
-        534, 580
-    };
-
-static const std::set <uint32> _instances40Man = { 
-      //AQ40, BWL, MC
-        531, 469, 409
-    };
 #endif

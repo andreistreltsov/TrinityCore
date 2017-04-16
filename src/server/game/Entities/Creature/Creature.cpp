@@ -52,6 +52,38 @@
 
 #include "Packets/QueryPackets.h"
 
+_instances5Man = { 
+      // Kalimdor
+      //RFC, BFD, DM, Mara,RFK,RFD,WC, ZF
+        389, 48, 429, 349, 47, 129, 43, 209,
+      // EK
+      //BRD, BRS, Gnome,DM,SM, Sch, SFK,Strat,ST, Ulda
+        230, 229, 90, 36, 189, 289, 33, 329, 109, 70,
+      //TBC
+      //HFH, BM,   STRAT, MGT, Auch,HFR, MT,  SH,  SL,  Arc, BF,  Bota,mech,ShH, SP,  SV, UB
+        560,  269,  595,  585, 558, 543, 557, 556, 555, 552, 542, 553, 554, 540, 547, 545, 546
+    };
+
+_instances10Man = { 
+       //Kara, ZA
+        532, 568
+    };
+
+_instances20Man = { 
+       //AQ20,  ZG
+        509,    309
+    };
+
+_instances25Man = { 
+       //MH, SWP
+        534, 580
+    };
+
+_instances40Man = { 
+      //AQ40, BWL, MC
+        531, 469, 409
+    };
+
 TrainerSpell const* TrainerSpellData::Find(uint32 spell_id) const
 {
     TrainerSpellMap::const_iterator itr = spellList.find(spell_id);
