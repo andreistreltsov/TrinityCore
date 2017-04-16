@@ -703,7 +703,7 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         uint32 GetOriginalEntry() const { return m_originalEntry; }
         void SetOriginalEntry(uint32 entry) { m_originalEntry = entry; }
 
-        static float _GetDamageMod(int32 Rank, Creature const* creature);
+        static float _GetDamageMod(int32 Rank);
 
         float m_SightDistance, m_CombatDistance;
 
@@ -732,7 +732,7 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         // vendor items
         VendorItemCounts m_vendorItemCounts;
 
-        static float _GetHealthMod(int32 Rank);
+        static float _GetHealthMod(int32 Rank, Creature const* creature);
 
         ObjectGuid m_lootRecipient;
         uint32 m_lootRecipientGroup;
