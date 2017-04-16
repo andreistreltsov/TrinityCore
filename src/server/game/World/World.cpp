@@ -305,7 +305,7 @@ bool World::HasRecentlyDisconnected(WorldSession* session)
     return false;
  }
 
-int32 World::GetQueuePos(WorldSession* sess)
+int32 QueuePos(WorldSession* sess)
 {
     uint32 position = 1;
 
@@ -489,6 +489,39 @@ void World::LoadConfigSettings(bool reload)
     rate_values[RATE_HONOR] = sConfigMgr->GetFloatDefault("Rate.Honor", 1.0f);
     rate_values[RATE_ARENA_POINTS] = sConfigMgr->GetFloatDefault("Rate.ArenaPoints", 1.0f);
     rate_values[RATE_INSTANCE_RESET_TIME] = sConfigMgr->GetFloatDefault("Rate.InstanceResetTime", 1.0f);
+
+
+    // CUSTOM RATE CONFIG
+
+    // 5-Man Old Instances (<= 60LVL)
+    rate_values[RATE_CREATURE_NORMAL_DAMAGE_5MANOLD]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.Damage.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_ELITE_DAMAGE_5MANOLD]     = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.Elite.Damage.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RAREELITE_DAMAGE_5MANOLD] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.Damage.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_WORLDBOSS_DAMAGE_5MANOLD] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.Damage.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_DAMAGE_5MANOLD]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.Damage.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_NORMAL_HP_5MANOLD]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.HP.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_ELITE_HP_5MANOLD]     = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.Elite.HP.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RAREELITE_HP_5MANOLD] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.HP.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_WORLDBOSS_HP_5MANOLD] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.HP.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_HP_5MANOLD]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.HP.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_NORMAL_SPELLDAMAGE_5MANOLD]          = sConfigMgr->GetFloatDefault("Rate.Creature.Normal.SpellDamage.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE_5MANOLD]     = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.Elite.SpellDamage.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RAREELITE_SPELLDAMAGE_5MANOLD] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RAREELITE.SpellDamage.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE_5MANOLD] = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.SpellDamage.5ManOld", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_SPELLDAMAGE_5MANOLD]      = sConfigMgr->GetFloatDefault("Rate.Creature.Elite.RARE.SpellDamage.5ManOld", 1.0f);
+    rate_values[RATE_XP_KILL_5MANOLD]     = sConfigMgr->GetFloatDefault("Rate.XP.Kill.5ManOld.5ManOld", 1.0f);
+    rate_values[RATE_DROP_ITEM_POOR_5MANOLD]       = sConfigMgr->GetFloatDefault("Rate.Drop.Item.Poor.5ManOld", 1.0f);
+    rate_values[RATE_DROP_ITEM_NORMAL_5MANOLD]     = sConfigMgr->GetFloatDefault("Rate.Drop.Item.Normal.5ManOld", 1.0f);
+    rate_values[RATE_DROP_ITEM_UNCOMMON_5MANOLD]   = sConfigMgr->GetFloatDefault("Rate.Drop.Item.Uncommon.5ManOld", 1.0f);
+    rate_values[RATE_DROP_ITEM_RARE_5MANOLD]       = sConfigMgr->GetFloatDefault("Rate.Drop.Item.Rare.5ManOld", 1.0f);
+    rate_values[RATE_DROP_ITEM_EPIC_5MANOLD]       = sConfigMgr->GetFloatDefault("Rate.Drop.Item.Epic.5ManOld", 1.0f);
+    rate_values[RATE_DROP_ITEM_LEGENDARY_5MANOLD]  = sConfigMgr->GetFloatDefault("Rate.Drop.Item.Legendary.5ManOld", 1.0f);
+    rate_values[RATE_DROP_ITEM_ARTIFACT_5MANOLD]   = sConfigMgr->GetFloatDefault("Rate.Drop.Item.Artifact.5ManOld", 1.0f);
+    rate_values[RATE_DROP_MONEY_5MANOLD]  = sConfigMgr->GetFloatDefault("Rate.Drop.Money.5ManOld", 1.0f);
+
+
+
+
     rate_values[RATE_TALENT] = sConfigMgr->GetFloatDefault("Rate.Talent", 1.0f);
     if (rate_values[RATE_TALENT] < 0.0f)
     {

@@ -1290,7 +1290,7 @@ void Creature::UpdateLevelDependantStats()
     CreatureBaseStats const* stats = sObjectMgr->GetCreatureBaseStats(getLevel(), cInfo->unit_class);
 
     // health
-    float healthmod = _GetHealthMod(rank);
+    float healthmod = _GetHealthMod(rank, this);
 
     uint32 basehp = stats->GenerateHealth(cInfo);
     uint32 health = uint32(basehp * healthmod);
@@ -1335,22 +1335,37 @@ void Creature::UpdateLevelDependantStats()
     SetStatFlatModifier(UNIT_MOD_ARMOR, BASE_VALUE, armor);
 }
 
-float Creature::_GetHealthMod(int32 Rank)
+float Creature::_GetHealthMod(int32 Rank, Creature const* creature)
 {
-    switch (Rank)                                           // define rates for each elite rank
+    uint32 mapId = creature->GetMap()->GetId();
+
+    float normal = 1;
+    float elite = 1;
+    float rare = 1;
+    float worldBoss = 1;
+    
+
+    if(_instances5man.find(mapId) != _instances5man.end()){
+        normal = return sWorld->getRate(RATE_CREATURE_NORMAL_HP_5MANOLD);
+        elite = return sWorld->getRate(RATE_CREATURE_ELITE_HP_5MANOLD);
+        rare = return sWorld->getRate(RATE_CREATURE_ELITE_RARE_HP_5MANOLD);
+        worldBoss = return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_HP_5MANOLD);
+    }
+
+    switch (Rank)     // define rates for each elite rank
     {
         case CREATURE_ELITE_NORMAL:
-            return sWorld->getRate(RATE_CREATURE_NORMAL_HP);
+            return sWorld->getRate(RATE_CREATURE_NORMAL_HP)*normal;
         case CREATURE_ELITE_ELITE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_HP);
+            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_HP)*elite;
         case CREATURE_ELITE_RAREELITE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_RAREELITE_HP);
+            return sWorld->getRate(RATE_CREATURE_ELITE_RAREELITE_HP)*elite;
         case CREATURE_ELITE_WORLDBOSS:
-            return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_HP);
+            return sWorld->getRate(RATE_CREATURE_ELITE_WORLDBOSS_HP)*worldBoss;
         case CREATURE_ELITE_RARE:
-            return sWorld->getRate(RATE_CREATURE_ELITE_RARE_HP);
+            return sWorld->getRate(RATE_CREATURE_ELITE_RARE_HP)*rare;
         default:
-            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_HP);
+            return sWorld->getRate(RATE_CREATURE_ELITE_ELITE_HP)*elite;
     }
 }
 
@@ -1555,7 +1570,7 @@ void Creature::SetSpawnHealth()
         curhealth = m_creatureData->curhealth;
         if (curhealth)
         {
-            curhealth = uint32(curhealth*_GetHealthMod(GetCreatureTemplate()->rank));
+            curhealth = uint32(curhealth*_GetHealthMod(GetCreatureTemplate()->rank), this);
             if (curhealth < 1)
                 curhealth = 1;
         }
