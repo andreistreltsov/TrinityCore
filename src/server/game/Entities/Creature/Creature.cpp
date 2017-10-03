@@ -53,36 +53,91 @@
 #include "Packets/QueryPackets.h"
 
 std::set <uint32> _instances5Man = { 
-      // Kalimdor
-      //RFC, BFD, DM, Mara,RFK,RFD,WC, ZF
-        389, 48, 429, 349, 47, 129, 43, 209,
-      // EK
-      //BRD, BRS, Gnome,DM,SM, Sch, SFK,Strat,ST, Ulda
-        230, 229, 90, 36, 189, 289, 33, 329, 109, 70,
-      //TBC
-      //HFH, BM,   STRAT, MGT, Auch,HFR, MT,  SH,  SL,  Arc, BF,  Bota,mech,ShH, SP,  SV, UB
-        560,  269,  595,  585, 558, 543, 557, 556, 555, 552, 542, 553, 554, 540, 547, 545, 546
+        389, // RFC       (12-15)
+        43,  // WC        (17-24)
+        36,  // Deadmines (17-25)
+
+        33,  // SFK       (22-30)
+        48,  // BFD       (24-32)
+        47,  // RFK       (25-30)
+        90,  // Gnome     (25-30)
+
+        189, // Scarlet   (35-45)
+
+        129, // RFD       (37-45)
+        70,  // Uldaman   (41-51)
+        209, // ZF        (42-46)
+        349, // Mara      (46-55)
+
+        109, // SunkenTemple (50-56)
+        230, // BRD       (52-60)
+
+        229, // BRS       (55-60)
+        429, // DM        (55-60)
+        289, // Scholo    (58-60)
+        329, // Strat     (58-60)
+
+        // Vanilla 20man Raids
+        309  // ZG        (60+)
+        509, // AQ20      (60++)
+
+        // Vanilla 40man Raids
+        409   // MC       (60+)
+        531,  // AQ40     (60+++)
+        469,  // BWL      (60++)
+
+        // TBC
+        543, // HFRamp         (60)
+        542, // Blood Furnace  (60)
+        547, // Slave Pens     (60)
+        546  // Underbog       (60)
+
+        557, // Mana           (62)
+        558, // Auch           (63)
+        560, // COT:HFH        (64)
+        556, // Sethekk        (65)
+        545, // Steam Vault    (67)
+        553, // Botanica       (67)
+
+        540, // ShatteredHalls (67)
+        269, // COT:BM         (68)
+        555, // Shadow Lab     (68)
+        552, // Arca           (68)
+        554, // Mecha          (69)
+        585, // MGT            (70)
+
+        // TBC 10-man Raids
+        532, // Kara 
+        568, // ZA
+
+        // TBC 25-man Raids MH, SWP
+        534, // Mount Hyjal
+        580  // Sunwell
+
+        // Wotlk
+        595, // COT:Strat      (75)
     };
 
+std::set <uint32> _instances1 = { 
+};
+std::set <uint32> _instances2 = { 
+};
+std::set <uint32> _instances3 = { 
+};
+std::set <uint32> _instances4 = { 
+};
+std::set <uint32> _instances5 = { 
+};
+std::set <uint32> _instances6 = { 
+};
+std::set <uint32> _instances7 = { 
+};
+std::set <uint32> _instances8 = { 
+};
+std::set <uint32> _instances9 = { 
+};
 std::set <uint32> _instances10Man = { 
-       //Kara, ZA
-        532, 568
-    };
-
-std::set <uint32> _instances20Man = { 
-       //AQ20,  ZG
-        509,    309
-    };
-
-std::set <uint32> _instances25Man = { 
-       //MH, SWP
-        534, 580
-    };
-
-std::set <uint32> _instances40Man = { 
-      //AQ40, BWL, MC
-        531, 469, 409
-    };
+};
 
 TrainerSpell const* TrainerSpellData::Find(uint32 spell_id) const
 {

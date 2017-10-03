@@ -828,6 +828,6 @@ class TC_GAME_API ForcedDespawnDelayEvent : public BasicEvent
         Seconds const m_respawnTimer;
 };
 
-extern std::set <uint32> _instances5Man, _instances10Man, _instances20Man, _instances25Man, _instances40Man;
+extern std::set <uint32> _instances5Man, _instances1, _instances2, _instances3, _instances4, _instances5, _instances6, _instances7, _instances8, _instances9, _instances10;
 
 #endif
